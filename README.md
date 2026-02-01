@@ -1,24 +1,52 @@
-# README
+# Hooka Loyalty
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+Loyalty program application built with Ruby on Rails.
 
-Things you may want to cover:
+## Requirements
 
-* Ruby version
+- Ruby 4.0.1
+- Node.js 24.13.0
+- SQLite 3.8+
 
-* System dependencies
+## Setup
 
-* Configuration
+```bash
+# Install Ruby dependencies (stored in vendor/bundle)
+bundle install
 
-* Database creation
+# Install JavaScript dependencies
+bin/importmap
 
-* Database initialization
+# Create and set up the database
+bin/rails db:setup
 
-* How to run the test suite
+# Install Turbo, Stimulus, and Importmap (first time only)
+bin/rails importmap:install
+bin/rails turbo:install
+bin/rails stimulus:install
+```
 
-* Services (job queues, cache servers, search engines, etc.)
+## Running the app
 
-* Deployment instructions
+```bash
+bin/rails server
+```
 
-* ...
+The app will be available at http://localhost:3000.
+
+## Running tests
+
+```bash
+bin/rails test
+```
+
+## Stack
+
+- **Framework:** Rails 8.1
+- **Asset Pipeline:** Propshaft
+- **JavaScript:** Hotwire (Turbo + Stimulus) via Importmap
+- **Database:** SQLite3
+- **Background Jobs:** Solid Queue
+- **Caching:** Solid Cache
+- **WebSockets:** Solid Cable
+- **Web Server:** Puma + Thruster
