@@ -1,13 +1,69 @@
 # Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
 
-one:
-  client: one
+# John's purchases - 7 paid, 1 reward
+john_purchase_1:
+  client: john
   employee: one
   is_reward: false
-  note: MyString
+  note: "Regular purchase"
 
-two:
-  client: two
+john_purchase_2:
+  client: john
+  employee: one
+  is_reward: false
+  note: "Regular purchase"
+
+john_purchase_3:
+  client: john
+  employee: one
+  is_reward: false
+  note: "Regular purchase"
+
+john_purchase_4:
+  client: john
+  employee: one
+  is_reward: false
+  note: "Regular purchase"
+
+john_purchase_5:
+  client: john
+  employee: one
+  is_reward: false
+  note: "Regular purchase"
+
+john_purchase_6:
+  client: john
+  employee: one
+  is_reward: false
+  note: "Regular purchase"
+
+john_purchase_7:
+  client: john
+  employee: one
+  is_reward: false
+  note: "Regular purchase"
+
+john_reward_1:
+  client: john
+  employee: one
+  is_reward: true
+  note: "Claimed reward"
+
+# Jane's purchases - 3 paid, 0 rewards
+jane_purchase_1:
+  client: jane
   employee: two
   is_reward: false
-  note: MyString
+  note: "Regular purchase"
+
+jane_purchase_2:
+  client: jane
+  employee: two
+  is_reward: false
+  note: "Regular purchase"
+
+jane_purchase_3:
+  client: jane
+  employee: two
+  is_reward: false
+  note: "Regular purchase"

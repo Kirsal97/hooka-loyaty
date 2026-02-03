@@ -1,11 +1,11 @@
 # Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
 
-one:
-  key: MyString
-  value: MyString
-  description: MyString
+reward_threshold:
+  key: "reward_threshold"
+  value: "5"
+  description: "Number of paid purchases needed to earn a reward"
 
-two:
-  key: MyString
-  value: MyString
-  description: MyString
+lounge_name:
+  key: "lounge_name"
+  value: "Paradise Hookah Lounge"
+  description: "Name of the lounge"
