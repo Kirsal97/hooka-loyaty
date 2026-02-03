@@ -5,7 +5,7 @@
   <% if clients.any? %>
     <div class="list-group shadow-sm">
     <% clients.each do |client| %>
-      <%= link_to "#", class: "list-group-item list-group-item-action" do %>
+      <%= link_to client_path(client), class: "list-group-item list-group-item-action", data: { turbo_frame: "_top" } do %>
         <div class="d-flex justify-content-between align-items-center">
           <div>
             <h6 class="mb-1"><%= client.name %></h6>
@@ -43,7 +43,7 @@
       </svg>
       <% if query.present? %>
         <p>No clients found matching "<strong><%= query %></strong>"</p>
-        <%= link_to "Add New Client", "#", class: "btn btn-primary" %>
+        <%= link_to "Add New Client", new_client_path, class: "btn btn-primary", data: { turbo_frame: "_top" } %>
       <% else %>
         <p>No recent clients yet</p>
         <p class="small">Search for a client or add a new one to get started.</p>

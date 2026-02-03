@@ -5,10 +5,7 @@ class DashboardController < ApplicationController
     if @query.present?
       @clients = Client.search_by_phone(@query).limit(20)
     else
-      @clients = Client.joins(:purchases)
-                       .distinct
-                       .order("purchases.created_at DESC")
-                       .limit(10)
+      @clients = Client.order(created_at: :desc).limit(10)
     end
 
     # Render only the results partial for Turbo Frame requests
