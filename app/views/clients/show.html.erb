@@ -1,0 +1,81 @@
+<% content_for(:title) { @client.name } %>
+
+<div class="row justify-content-center">
+  <div class="col-lg-8">
+    <div class="d-flex justify-content-between align-items-start mb-4">
+      <div>
+        <h1 class="h3 mb-1"><%= @client.name %></h1>
+        <div class="text-muted">
+          <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" viewBox="0 0 16 16" class="me-1">
+            <path d="M3.654 1.328a.678.678 0 0 0-1.015-.063L1.605 2.3c-.483.484-.661 1.169-.45 1.77a17.568 17.568 0 0 0 4.168 6.608 17.569 17.569 0 0 0 6.608 4.168c.601.211 1.286.033 1.77-.45l1.034-1.034a.678.678 0 0 0-.063-1.015l-2.307-1.794a.678.678 0 0 0-.58-.122l-2.19.547a1.745 1.745 0 0 1-1.657-.459L5.482 8.062a1.745 1.745 0 0 1-.46-1.657l.548-2.19a.678.678 0 0 0-.122-.58L3.654 1.328zM1.884.511a1.745 1.745 0 0 1 2.612.163L6.29 2.98c.329.423.445.974.315 1.494l-.547 2.19a.678.678 0 0 0 .178.643l2.457 2.457a.678.678 0 0 0 .644.178l2.189-.547a1.745 1.745 0 0 1 1.494.315l2.306 1.794c.829.645.905 1.87.163 2.611l-1.034 1.034c-.74.74-1.846 1.065-2.877.702a18.634 18.634 0 0 1-7.01-4.42 18.634 18.634 0 0 1-4.42-7.009c-.362-1.03-.037-2.137.703-2.877L1.885.511z"/>
+          </svg>
+          <%= @client.phone %>
+        </div>
+      </div>
+      <div class="text-end">
+        <%= link_to "Edit", edit_client_path(@client), class: "btn btn-outline-secondary btn-sm" %>
+      </div>
+    </div>
+
+    <% progress_percent = (@client.progress_to_next_reward.to_f / Setting.reward_threshold * 100).round %>
+    <div class="card shadow-sm mb-4">
+      <div class="card-body">
+        <h2 class="h6 text-uppercase text-muted mb-3">Reward Progress</h2>
+        <div class="d-flex align-items-center justify-content-between mb-2">
+          <div class="fw-semibold">
+            <%= @client.progress_to_next_reward %>/<%= Setting.reward_threshold %> until free hookah
+          </div>
+          <div class="text-muted small">
+            Available rewards: <strong><%= @client.available_rewards %></strong>
+          </div>
+        </div>
+        <div class="progress mb-3" style="height: 8px;">
+          <div class="progress-bar" role="progressbar" style="width: <%= progress_percent %>%"></div>
+        </div>
+        <div class="d-flex justify-content-between align-items-center">
+          <div class="small text-muted">Earn <%= Setting.reward_threshold %> paid purchases for a reward.</div>
+          <%= button_to "Claim", "#", class: "btn btn-sm btn-success", disabled: !@client.can_claim_reward? %>
+        </div>
+      </div>
+    </div>
+
+    <div class="d-flex justify-content-between align-items-center mb-3">
+      <h2 class="h6 text-uppercase text-muted mb-0">Purchase History</h2>
+      <%= link_to "Add Purchase", "#", class: "btn btn-primary btn-sm" %>
+    </div>
+
+    <% if @purchases.any? %>
+      <div class="table-responsive">
+        <table class="table table-sm align-middle">
+          <thead class="table-light">
+            <tr>
+              <th>Date</th>
+              <th>Type</th>
+              <th>Note</th>
+              <th>Employee</th>
+            </tr>
+          </thead>
+          <tbody>
+            <% @purchases.each do |purchase| %>
+              <tr>
+                <td><%= purchase.created_at.strftime("%b %d, %Y") %></td>
+                <td><%= purchase.is_reward? ? "Reward" : "Paid" %></td>
+                <td><%= purchase.note.presence || "-" %></td>
+                <td><%= purchase.employee.name %></td>
+              </tr>
+            <% end %>
+          </tbody>
+        </table>
+      </div>
+    <% else %>
+      <div class="text-center text-muted py-4">
+        No purchases yet.
+      </div>
+    <% end %>
+
+    <div class="mt-4 d-flex gap-3">
+      <%= link_to "Back to dashboard", root_path, class: "link-secondary" %>
+      <%= link_to "Edit client", edit_client_path(@client), class: "link-secondary" %>
+    </div>
+  </div>
+</div>
