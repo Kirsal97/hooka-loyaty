@@ -1,0 +1,10 @@
+---
+alwaysApply: true
+---
+
+This is Ruby on Rails 8 project, using Ruby 4.0.1
+Frontend is based on Turbo + Stumulus, with Bootstrap 5 UI
+
+Dependencies are installed in 'vendor/bundle'
+
+Project uses rubocop for lint and codestyle, always check it after task is done
