@@ -29,9 +29,9 @@ end
 
 3.times do |i|
   Purchase.create!(
-    client: [client1, client2, client3].sample,
+    client: [ client1, client2, client3 ].sample,
     employee: admin_employee,
-    is_reward: [true, false].sample,
+    is_reward: [ true, false ].sample,
     note: "Test purchase #{i + 1}"
   )
 end
