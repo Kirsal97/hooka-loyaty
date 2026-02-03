@@ -31,23 +31,31 @@
         </a>
 
         <% if authenticated? %>
-          <ul class="navbar-nav me-auto">
-            <li class="nav-item">
-              <%= link_to "Dashboard", root_path, class: "nav-link" %>
-            </li>
-            <li class="nav-item">
-              <%= link_to "Add Client", new_client_path, class: "nav-link" %>
-            </li>
-            <li class="nav-item">
-              <%= link_to "Settings", settings_path, class: "nav-link" %>
-            </li>
-          </ul>
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+          </button>
 
-          <span class="navbar-text me-3">
-            <%= Current.employee&.name %>
-          </span>
+          <div class="collapse navbar-collapse" id="navbarNav">
+            <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+              <li class="nav-item">
+                <%= link_to "Dashboard", root_path, class: "nav-link #{'active' if current_page?(root_path)}" %>
+              </li>
+              <li class="nav-item">
+                <%= link_to "Add Client", new_client_path, class: "nav-link #{'active' if current_page?(new_client_path)}" %>
+              </li>
+              <li class="nav-item">
+                <%= link_to "Settings", settings_path, class: "nav-link #{'active' if current_page?(settings_path)}" %>
+              </li>
+            </ul>
 
-          <%= button_to "Logout", session_path, method: :delete, class: "btn btn-outline-light" %>
+            <div class="d-flex flex-column flex-lg-row align-items-start align-items-lg-center gap-2 mt-3 mt-lg-0">
+              <span class="navbar-text">
+                <%= Current.employee&.name %>
+              </span>
+
+              <%= button_to "Logout", session_path, method: :delete, class: "btn btn-outline-light btn-sm", form_class: "m-0" %>
+            </div>
+          </div>
         <% end %>
       </div>
     </nav>

@@ -10,6 +10,15 @@ class Client < ApplicationRecord
     where("phone LIKE ?", "%#{phone.gsub(/\D/, '')}%")
   }
 
+  def formatted_phone
+    return phone if phone.blank?
+
+    digits = phone.gsub(/\D/, "")
+    return phone if digits.length != 10
+
+    digits.gsub(/(\d{3})(\d{3})(\d{4})/, '(\1) \2-\3')
+  end
+
   def paid_purchases_count
     purchases.where(is_reward: false).count
   end
