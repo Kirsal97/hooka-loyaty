@@ -1,5 +1,26 @@
 <% content_for(:title) { @client.name } %>
 
+<% if flash[:notice] || flash[:alert] %>
+  <div class="toast-container position-fixed top-0 end-0 p-3" data-controller="toast" style="z-index: 1080;">
+    <% if flash[:notice] %>
+      <div class="toast text-bg-success border-0" role="alert" aria-live="assertive" aria-atomic="true" data-bs-delay="3500">
+        <div class="d-flex">
+          <div class="toast-body"><%= flash[:notice] %></div>
+          <button type="button" class="btn-close btn-close-white me-2 m-auto" data-bs-dismiss="toast" aria-label="Close"></button>
+        </div>
+      </div>
+    <% end %>
+    <% if flash[:alert] %>
+      <div class="toast text-bg-danger border-0" role="alert" aria-live="assertive" aria-atomic="true" data-bs-delay="5000">
+        <div class="d-flex">
+          <div class="toast-body"><%= flash[:alert] %></div>
+          <button type="button" class="btn-close btn-close-white me-2 m-auto" data-bs-dismiss="toast" aria-label="Close"></button>
+        </div>
+      </div>
+    <% end %>
+  </div>
+<% end %>
+
 <div class="row justify-content-center">
   <div class="col-lg-8">
     <div class="d-flex justify-content-between align-items-start mb-4">
