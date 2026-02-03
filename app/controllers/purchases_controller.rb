@@ -31,6 +31,20 @@ class PurchasesController < ApplicationController
     end
   end
 
+  def destroy
+    @purchase = @client.purchases.find(params[:id])
+
+    unless @purchase.can_undo?
+      return redirect_to @client, alert: "Can only undo purchases within 5 minutes"
+    end
+
+    if @purchase.destroy
+      redirect_to @client, notice: "Purchase removed"
+    else
+      redirect_to @client, alert: "Failed to remove purchase"
+    end
+  end
+
   private
 
   def set_client

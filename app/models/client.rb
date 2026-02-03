@@ -20,11 +20,11 @@ class Client < ApplicationRecord
   end
 
   def paid_purchases_count
-    purchases.where(is_reward: false).count
+    self[:paid_purchases_count] || purchases.paid.count
   end
 
   def claimed_rewards_count
-    purchases.where(is_reward: true).count
+    self[:reward_purchases_count] || purchases.rewards.count
   end
 
   def available_rewards

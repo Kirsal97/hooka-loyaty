@@ -15,7 +15,10 @@ class ClientsController < ApplicationController
   end
 
   def show
-    @purchases = @client.purchases.recent.includes(:employee).limit(20)
+    @per_page = 20
+    @offset = [ params[:offset].to_i, 0 ].max
+    @purchases = @client.purchases.recent.includes(:employee).limit(@per_page).offset(@offset)
+    @has_more = @client.purchases_count.to_i > (@offset + @per_page)
   end
 
   def edit; end

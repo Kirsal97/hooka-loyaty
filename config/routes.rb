@@ -7,7 +7,7 @@ Rails.application.routes.draw do
   root "dashboard#index"
 
   resources :clients, only: [ :new, :create, :show, :edit, :update ] do
-    resources :purchases, only: [ :create ] do
+    resources :purchases, only: [ :create, :destroy ] do
       collection do
         post :claim_reward
       end

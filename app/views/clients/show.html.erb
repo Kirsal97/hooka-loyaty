@@ -34,7 +34,7 @@
           <%= @client.formatted_phone %>
         </div>
         <div class="d-flex flex-wrap gap-3 text-muted small mt-2">
-          <span>Total: <%= @client.purchases.count %> purchases</span>
+          <span>Total: <%= @client.purchases_count %> purchases</span>
           <span>Paid: <%= @client.paid_purchases_count %></span>
           <span>Rewards claimed: <%= @client.claimed_rewards_count %></span>
         </div>
@@ -79,6 +79,7 @@
               <th>Type</th>
               <th>Note</th>
               <th>Employee</th>
+              <th></th>
             </tr>
           </thead>
           <tbody>
@@ -94,10 +95,26 @@
                 </td>
                 <td><%= purchase.note.presence || "-" %></td>
                 <td><%= purchase.employee.name %></td>
+                <td class="text-end">
+                  <% if purchase.can_undo? %>
+                    <%= button_to "Undo",
+                      client_purchase_path(@client, purchase),
+                      method: :delete,
+                      data: { turbo_confirm: "Remove this purchase?" },
+                      class: "btn btn-sm btn-outline-danger" %>
+                  <% end %>
+                </td>
               </tr>
             <% end %>
           </tbody>
         </table>
+        <% if @has_more %>
+          <div class="d-flex justify-content-end">
+            <%= link_to "Load more",
+              client_path(@client, offset: @offset + @per_page),
+              class: "btn btn-sm btn-outline-secondary" %>
+          </div>
+        <% end %>
       </div>
     <% else %>
       <div class="text-center text-muted py-4">
