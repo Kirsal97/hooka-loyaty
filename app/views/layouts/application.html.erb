@@ -24,6 +24,34 @@
   </head>
 
   <body>
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+      <div class="container">
+        <a class="navbar-brand" href="<%= root_path %>">
+          <%= Setting.lounge_name %>
+        </a>
+
+        <% if authenticated? %>
+          <ul class="navbar-nav me-auto">
+            <li class="nav-item">
+              <%= link_to "Dashboard", root_path, class: "nav-link" %>
+            </li>
+            <li class="nav-item">
+              <%= link_to "Add Client", new_client_path, class: "nav-link" %>
+            </li>
+            <li class="nav-item">
+              <%= link_to "Settings", settings_path, class: "nav-link" %>
+            </li>
+          </ul>
+
+          <span class="navbar-text me-3">
+            <%= Current.employee&.name %>
+          </span>
+
+          <%= button_to "Logout", session_path, method: :delete, class: "btn btn-outline-light" %>
+        <% end %>
+      </div>
+    </nav>
+
     <% unless controller_name == "settings" || (controller_name == "clients" && action_name == "show") %>
       <% if flash[:notice] %>
         <div class="alert alert-success alert-dismissible fade show m-0 rounded-0" role="alert">
