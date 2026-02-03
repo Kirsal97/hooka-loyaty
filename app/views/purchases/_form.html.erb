@@ -1,0 +1,7 @@
+<%= form_with model: [client, Purchase.new], local: true, class: "mb-4" do |f| %>
+  <div class="mb-3">
+    <%= f.label :note, class: "form-label small text-muted" %>
+    <%= f.text_field :note, class: "form-control form-control-sm", placeholder: "Optional note" %>
+  </div>
+  <%= f.submit "Add Purchase", class: "btn btn-primary btn-sm" %>
+<% end %>

@@ -1,7 +1,13 @@
 Rails.application.routes.draw do
   resource :session
   resources :passwords, param: :token
-  resources :clients, only: [ :new, :create, :show, :edit, :update ]
+  resources :clients, only: [ :new, :create, :show, :edit, :update ] do
+    resources :purchases, only: [ :create ] do
+      collection do
+        post :claim_reward
+      end
+    end
+  end
   # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
 
   # Reveal health status on /up that returns 200 if the app boots with no exceptions, otherwise 500.
