@@ -49,16 +49,25 @@
             </ul>
 
             <div class="d-flex flex-column flex-lg-row align-items-start align-items-lg-center gap-2 mt-3 mt-lg-0">
-              <div class="btn-group btn-group-sm" role="group">
-                <%= button_to "EN", locale_path(locale: :en), method: :patch,
-                    class: "btn btn-outline-light #{'active' if I18n.locale == :en} #{'text-bg-secondary' if I18n.locale != :en}",
-                    form_class: "m-0" %>
-                <%= button_to "RU", locale_path(locale: :ru), method: :patch,
-                    class: "btn btn-outline-light #{'active' if I18n.locale == :ru} #{'text-bg-secondary' if I18n.locale != :ru}",
-                    form_class: "m-0" %>
+              <div class="dropdown me-2">
+                <button class="btn btn-outline-light btn-sm dropdown-toggle" type="button" id="languageDropdown" data-bs-toggle="dropdown" aria-expanded="false">
+                  <%= I18n.locale.to_s.upcase %>
+                </button>
+                <ul class="dropdown-menu dropdown-menu-dark" aria-labelledby="languageDropdown">
+                  <li>
+                    <%= button_to "English", locale_path(locale: :en), method: :patch,
+                        class: "dropdown-item #{'active' if I18n.locale == :en}",
+                        form_class: "m-0" %>
+                  </li>
+                  <li>
+                    <%= button_to "Русский", locale_path(locale: :ru), method: :patch,
+                        class: "dropdown-item #{'active' if I18n.locale == :ru}",
+                        form_class: "m-0" %>
+                  </li>
+                </ul>
               </div>
 
-              <span class="navbar-text">
+              <span class="navbar-text text-light">
                 <%= Current.employee&.name %>
               </span>
 
