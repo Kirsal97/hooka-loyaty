@@ -24,18 +24,20 @@
   </head>
 
   <body>
-    <% if flash[:notice] %>
-      <div class="alert alert-success alert-dismissible fade show m-0 rounded-0" role="alert">
-        <%= flash[:notice] %>
-        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-      </div>
-    <% end %>
+    <% unless controller_name == "settings" || (controller_name == "clients" && action_name == "show") %>
+      <% if flash[:notice] %>
+        <div class="alert alert-success alert-dismissible fade show m-0 rounded-0" role="alert">
+          <%= flash[:notice] %>
+          <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+        </div>
+      <% end %>
 
-    <% if flash[:alert] %>
-      <div class="alert alert-danger alert-dismissible fade show m-0 rounded-0" role="alert">
-        <%= flash[:alert] %>
-        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-      </div>
+      <% if flash[:alert] %>
+        <div class="alert alert-danger alert-dismissible fade show m-0 rounded-0" role="alert">
+          <%= flash[:alert] %>
+          <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+        </div>
+      <% end %>
     <% end %>
 
     <main class="container py-4">

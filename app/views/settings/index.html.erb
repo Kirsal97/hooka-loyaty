@@ -1,0 +1,64 @@
+<% content_for(:title) { "Settings" } %>
+
+<% if flash[:notice] || flash[:alert] %>
+  <div class="toast-container position-fixed top-0 end-0 p-3" data-controller="toast" style="z-index: 1080;">
+    <% if flash[:notice] %>
+      <div class="toast text-bg-success border-0" role="alert" aria-live="assertive" aria-atomic="true" data-bs-delay="3500">
+        <div class="d-flex">
+          <div class="toast-body"><%= flash[:notice] %></div>
+          <button type="button" class="btn-close btn-close-white me-2 m-auto" data-bs-dismiss="toast" aria-label="Close"></button>
+        </div>
+      </div>
+    <% end %>
+    <% if flash[:alert] %>
+      <div class="toast text-bg-danger border-0" role="alert" aria-live="assertive" aria-atomic="true" data-bs-delay="5000">
+        <div class="d-flex">
+          <div class="toast-body"><%= flash[:alert] %></div>
+          <button type="button" class="btn-close btn-close-white me-2 m-auto" data-bs-dismiss="toast" aria-label="Close"></button>
+        </div>
+      </div>
+    <% end %>
+  </div>
+<% end %>
+
+<div class="row justify-content-center">
+  <div class="col-lg-8">
+    <div class="d-flex justify-content-between align-items-center mb-4">
+      <h1 class="h3 mb-0">Settings</h1>
+      <%= link_to "Back to Dashboard", root_path, class: "btn btn-outline-secondary btn-sm" %>
+    </div>
+
+    <div class="card shadow-sm mb-3">
+      <div class="card-body">
+        <h2 class="h6">Lounge Name</h2>
+        <% lounge_description = @lounge_name.description.presence || "Display name shown in header." %>
+        <p class="text-muted small mb-3"><%= lounge_description %></p>
+        <%= form_with url: setting_path("lounge_name"), method: :patch, class: "d-flex gap-2 align-items-start" do |form| %>
+          <%= form.text_field :value,
+              value: (@lounge_name.value.presence || "Hookah Lounge"),
+              class: "form-control",
+              required: true %>
+          <%= form.hidden_field :description, value: lounge_description %>
+          <%= form.submit "Save", class: "btn btn-primary" %>
+        <% end %>
+      </div>
+    </div>
+
+    <div class="card shadow-sm mb-3">
+      <div class="card-body">
+        <h2 class="h6">Reward Threshold</h2>
+        <% threshold_description = @reward_threshold.description.presence || "Purchases needed for a free hookah." %>
+        <p class="text-muted small mb-3"><%= threshold_description %></p>
+        <%= form_with url: setting_path("reward_threshold"), method: :patch, class: "d-flex gap-2 align-items-start" do |form| %>
+          <%= form.number_field :value,
+              value: (@reward_threshold.value.presence || "5"),
+              min: 1,
+              class: "form-control",
+              required: true %>
+          <%= form.hidden_field :description, value: threshold_description %>
+          <%= form.submit "Save", class: "btn btn-primary" %>
+        <% end %>
+      </div>
+    </div>
+  </div>
+</div>
