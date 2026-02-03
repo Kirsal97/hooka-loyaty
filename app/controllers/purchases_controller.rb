@@ -7,15 +7,15 @@ class PurchasesController < ApplicationController
     @purchase.is_reward = false
 
     if @purchase.save
-      redirect_to @client, notice: "Purchase recorded"
+      redirect_to @client, notice: t("purchase.recorded")
     else
-      redirect_to @client, alert: "Failed to record purchase"
+      redirect_to @client, alert: t("purchase.failed_to_record")
     end
   end
 
   def claim_reward
     unless @client.can_claim_reward?
-      return redirect_to @client, alert: "No rewards available"
+      return redirect_to @client, alert: t("purchase.no_rewards_available")
     end
 
     @purchase = @client.purchases.build(
@@ -25,9 +25,9 @@ class PurchasesController < ApplicationController
     )
 
     if @purchase.save
-      redirect_to @client, notice: "Reward claimed! Enjoy your free hookah"
+      redirect_to @client, notice: t("purchase.reward_claimed")
     else
-      redirect_to @client, alert: "Failed to claim reward"
+      redirect_to @client, alert: t("purchase.failed_to_claim")
     end
   end
 
@@ -35,13 +35,13 @@ class PurchasesController < ApplicationController
     @purchase = @client.purchases.find(params[:id])
 
     unless @purchase.can_undo?
-      return redirect_to @client, alert: "Can only undo purchases within 5 minutes"
+      return redirect_to @client, alert: t("purchase.cant_undo")
     end
 
     if @purchase.destroy
-      redirect_to @client, notice: "Purchase removed"
+      redirect_to @client, notice: t("purchase.removed")
     else
-      redirect_to @client, alert: "Failed to remove purchase"
+      redirect_to @client, alert: t("purchase.failed_to_remove")
     end
   end
 

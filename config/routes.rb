@@ -3,6 +3,9 @@ Rails.application.routes.draw do
   resource :session
   resources :passwords, param: :token
 
+  # Locale switching
+  patch "locale", to: "locale#update"
+
   # Main application
   root "dashboard#index"
 

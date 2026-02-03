@@ -9,7 +9,7 @@ class SettingsController < ApplicationController
     if params[:key] == "reward_threshold"
       value = params[:value].to_i
       if params[:value].blank? || value < 1
-        return redirect_to settings_path, alert: "Threshold must be at least 1"
+        return redirect_to settings_path, alert: t("settings.threshold_too_low")
       end
     end
 
@@ -18,9 +18,9 @@ class SettingsController < ApplicationController
 
     if @setting.save
       Rails.cache.delete("setting:#{@setting.key}")
-      redirect_to settings_path, notice: "Setting updated"
+      redirect_to settings_path, notice: t("settings.updated")
     else
-      redirect_to settings_path, alert: "Failed to update setting"
+      redirect_to settings_path, alert: t("settings.failed_to_update")
     end
   end
 end

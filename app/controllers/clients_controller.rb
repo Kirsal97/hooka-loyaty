@@ -8,7 +8,7 @@ class ClientsController < ApplicationController
   def create
     @client = Client.new(client_params)
     if @client.save
-      redirect_to @client, notice: "Client added successfully"
+      redirect_to @client, notice: t("client.successfully_added")
     else
       render :new, status: :unprocessable_entity
     end
@@ -25,7 +25,7 @@ class ClientsController < ApplicationController
 
   def update
     if @client.update(client_params)
-      redirect_to @client, notice: "Client updated"
+      redirect_to @client, notice: t("client.updated")
     else
       render :edit, status: :unprocessable_entity
     end

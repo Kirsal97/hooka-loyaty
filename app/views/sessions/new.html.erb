@@ -2,24 +2,24 @@
   <div class="col-md-5 col-lg-4">
     <div class="card shadow-sm">
       <div class="card-body p-4">
-        <h2 class="card-title text-center mb-4">Sign in</h2>
+        <h2 class="card-title text-center mb-4"><%= t("session.sign_in") %></h2>
 
         <%= form_with url: session_path do |form| %>
           <div class="mb-3">
-            <%= form.label :email_address, "Email address", class: "form-label" %>
-            <%= form.email_field :email_address, required: true, autofocus: true, autocomplete: "username", placeholder: "Enter your email address", value: params[:email_address], class: "form-control" %>
+            <%= form.label :email_address, t("session.email_address"), class: "form-label" %>
+            <%= form.email_field :email_address, required: true, autofocus: true, autocomplete: "username", placeholder: t("session.email_placeholder"), value: params[:email_address], class: "form-control" %>
           </div>
 
           <div class="mb-3">
-            <%= form.label :password, "Password", class: "form-label" %>
-            <%= form.password_field :password, required: true, autocomplete: "current-password", placeholder: "Enter your password", maxlength: 72, class: "form-control" %>
+            <%= form.label :password, t("session.password"), class: "form-label" %>
+            <%= form.password_field :password, required: true, autocomplete: "current-password", placeholder: t("session.password_placeholder"), maxlength: 72, class: "form-control" %>
           </div>
 
-          <%= form.submit "Sign in", class: "btn btn-primary w-100" %>
+          <%= form.submit t("session.sign_in"), class: "btn btn-primary w-100" %>
         <% end %>
 
         <div class="text-center mt-3">
-          <%= link_to "Forgot password?", new_password_path %>
+          <%= link_to t("session.forgot_password"), new_password_path %>
         </div>
       </div>
     </div>

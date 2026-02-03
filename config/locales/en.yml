@@ -1,31 +1,111 @@
-# Files in the config/locales directory are used for internationalization and
-# are automatically loaded by Rails. If you want to use locales other than
-# English, add the necessary files in this directory.
-#
-# To use the locales, use `I18n.t`:
-#
-#     I18n.t "hello"
-#
-# In views, this is aliased to just `t`:
-#
-#     <%= t("hello") %>
-#
-# To use a different locale, set it with `I18n.locale`:
-#
-#     I18n.locale = :es
-#
-# This would use the information in config/locales/es.yml.
-#
-# To learn more about the API, please read the Rails Internationalization guide
-# at https://guides.rubyonrails.org/i18n.html.
-#
-# Be aware that YAML interprets the following case-insensitive strings as
-# booleans: `true`, `false`, `on`, `off`, `yes`, `no`. Therefore, these strings
-# must be quoted to be interpreted as strings. For example:
-#
-#     en:
-#       "yes": yup
-#       enabled: "ON"
-
 en:
-  hello: "Hello world"
+  nav:
+    dashboard: "Dashboard"
+    add_client: "Add Client"
+    settings: "Settings"
+    logout: "Logout"
+  
+  dashboard:
+    search_placeholder: "Search by phone number..."
+    search_button: "Search"
+    clients_header: "Clients"
+    add_new_client: "Add New Client"
+    results_count:
+      one: "%{count} result"
+      other: "%{count} results"
+    results_for: 'for "%{query}"'
+    no_clients_found: "No clients found matching <strong>%{query}</strong>"
+    no_recent_clients: "No recent clients yet"
+    search_or_add_hint: "Search for a client or add a new one to get started."
+  
+  client:
+    add_new: "Add New Client"
+    back: "Back"
+    back_to_dashboard: "Back to Dashboard"
+    edit: "Edit"
+    name: "Name"
+    phone: "Phone"
+    submit: "Save"
+    successfully_added: "Client added successfully"
+    updated: "Client updated"
+    fix_errors: "Please fix the errors below:"
+    purchases_count: "purchases"
+    paid_purchases_count: "Paid"
+    claimed_rewards_count: "Rewards claimed"
+  
+  clients:
+    show:
+      reward_progress: "Reward Progress"
+      until_free_hookah: "until free hookah"
+      available_rewards: "Available rewards"
+      earn_hint: "Earn %{count} paid purchases for a reward."
+      claim: "Claim"
+      claim_confirm: "Claim free hookah reward?"
+      add_purchase: "Add Purchase"
+      note: "Note"
+      optional_note: "Optional note"
+      add_purchase_button: "Add Purchase"
+      purchase_history: "Purchase History"
+      date: "Date"
+      type: "Type"
+      employee: "Employee"
+      reward: "Reward"
+      paid: "Paid"
+      undo: "Undo"
+      undo_confirm: "Remove this purchase?"
+      no_purchases: "No purchases yet."
+      load_more: "Load more"
+      rewards_available:
+        one: "%{count} reward available!"
+        other: "%{count} rewards available!"
+      progress: "Progress"
+  
+  purchase:
+    recorded: "Purchase recorded"
+    failed_to_record: "Failed to record purchase"
+    reward_claimed: "Reward claimed! Enjoy your free hookah"
+    failed_to_claim: "Failed to claim reward"
+    removed: "Purchase removed"
+    failed_to_remove: "Failed to remove purchase"
+    no_rewards_available: "No rewards available"
+    cant_undo: "Can only undo purchases within 5 minutes"
+  
+  settings:
+    title: "Settings"
+    lounge_name: "Lounge Name"
+    lounge_name_description: "Display name shown in header."
+    reward_threshold: "Reward Threshold"
+    reward_threshold_description: "Purchases needed for a free hookah."
+    save: "Save"
+    updated: "Setting updated"
+    failed_to_update: "Failed to update setting"
+    threshold_too_low: "Threshold must be at least 1"
+  
+  session:
+    sign_in: "Sign in"
+    email_address: "Email address"
+    email_placeholder: "Enter your email address"
+    password: "Password"
+    password_placeholder: "Enter your password"
+    forgot_password: "Forgot password?"
+    invalid_credentials: "Try another email address or password."
+    try_again_later: "Try again later."
+  
+  password:
+    forgot_title: "Forgot your password?"
+    update_title: "Update your password"
+    email_instructions: "Email reset instructions"
+    new_password: "New password"
+    confirm_password: "Confirm password"
+    new_password_placeholder: "Enter new password"
+    confirm_password_placeholder: "Repeat new password"
+    save: "Save"
+    reset_sent: "Password reset instructions sent (if employee with that email address exists)."
+    password_reset: "Password has been reset."
+    passwords_did_not_match: "Passwords did not match."
+    back_to_sign_in: "Back to sign in"
+    link_invalid: "Password reset link is invalid or has expired."
+    try_again_later: "Try again later."
+  
+  flash:
+    close: "Close"

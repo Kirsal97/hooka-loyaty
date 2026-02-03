@@ -1,6 +1,6 @@
 <%= turbo_frame_tag "search_results" do %>
   <% if query.present? %>
-    <p class="text-muted small mb-2"><%= clients.size %> result<%= clients.size != 1 ? 's' : '' %> for "<%= query %>"</p>
+    <p class="text-muted small mb-2"><%= t("dashboard.results_count", count: clients.size) %> <%= t("dashboard.results_for", query: query) %></p>
   <% end %>
   <% if clients.any? %>
     <div class="list-group shadow-sm">
@@ -19,11 +19,11 @@
           <div class="text-end">
             <% if client.can_claim_reward? %>
               <span class="badge bg-success mb-1">
-                <%= client.available_rewards %> reward<%= client.available_rewards > 1 ? 's' : '' %> available!
+                <%= t("clients.show.rewards_available", count: client.available_rewards) %>
               </span>
             <% end %>
             <div class="small text-muted">
-              Progress: <%= client.progress_to_next_reward %>/<%= Setting.reward_threshold %>
+              <%= t("clients.show.progress") %>: <%= client.progress_to_next_reward %>/<%= Setting.reward_threshold %>
             </div>
             <div class="progress" style="height: 6px; width: 100px;">
               <% progress_percent = (client.progress_to_next_reward.to_f / Setting.reward_threshold * 100).round %>
@@ -42,11 +42,11 @@
         <path d="M4.5 8a2.5 2.5 0 1 0 0-5 2.5 2.5 0 0 0 0 5z"/>
       </svg>
       <% if query.present? %>
-        <p>No clients found matching "<strong><%= query %></strong>"</p>
-        <%= link_to "Add New Client", new_client_path, class: "btn btn-primary", data: { turbo_frame: "_top" } %>
+        <p><%= t("dashboard.no_clients_found", query: query) %></p>
+        <%= link_to t("dashboard.add_new_client"), new_client_path, class: "btn btn-primary", data: { turbo_frame: "_top" } %>
       <% else %>
-        <p>No recent clients yet</p>
-        <p class="small">Search for a client or add a new one to get started.</p>
+        <p><%= t("dashboard.no_recent_clients") %></p>
+        <p class="small"><%= t("dashboard.search_or_add_hint") %></p>
       <% end %>
     </div>
   <% end %>

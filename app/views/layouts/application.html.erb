@@ -38,22 +38,31 @@
           <div class="collapse navbar-collapse" id="navbarNav">
             <ul class="navbar-nav me-auto mb-2 mb-lg-0">
               <li class="nav-item">
-                <%= link_to "Dashboard", root_path, class: "nav-link #{'active' if current_page?(root_path)}" %>
+                <%= link_to t("nav.dashboard"), root_path, class: "nav-link #{'active' if current_page?(root_path)}" %>
               </li>
               <li class="nav-item">
-                <%= link_to "Add Client", new_client_path, class: "nav-link #{'active' if current_page?(new_client_path)}" %>
+                <%= link_to t("nav.add_client"), new_client_path, class: "nav-link #{'active' if current_page?(new_client_path)}" %>
               </li>
               <li class="nav-item">
-                <%= link_to "Settings", settings_path, class: "nav-link #{'active' if current_page?(settings_path)}" %>
+                <%= link_to t("nav.settings"), settings_path, class: "nav-link #{'active' if current_page?(settings_path)}" %>
               </li>
             </ul>
 
             <div class="d-flex flex-column flex-lg-row align-items-start align-items-lg-center gap-2 mt-3 mt-lg-0">
+              <div class="btn-group btn-group-sm" role="group">
+                <%= button_to "EN", locale_path(locale: :en), method: :patch,
+                    class: "btn btn-outline-light #{'active' if I18n.locale == :en} #{'text-bg-secondary' if I18n.locale != :en}",
+                    form_class: "m-0" %>
+                <%= button_to "RU", locale_path(locale: :ru), method: :patch,
+                    class: "btn btn-outline-light #{'active' if I18n.locale == :ru} #{'text-bg-secondary' if I18n.locale != :ru}",
+                    form_class: "m-0" %>
+              </div>
+
               <span class="navbar-text">
                 <%= Current.employee&.name %>
               </span>
 
-              <%= button_to "Logout", session_path, method: :delete, class: "btn btn-outline-light btn-sm", form_class: "m-0" %>
+              <%= button_to t("nav.logout"), session_path, method: :delete, class: "btn btn-outline-light btn-sm", form_class: "m-0" %>
             </div>
           </div>
         <% end %>
@@ -64,14 +73,14 @@
       <% if flash[:notice] %>
         <div class="alert alert-success alert-dismissible fade show m-0 rounded-0" role="alert">
           <%= flash[:notice] %>
-          <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+          <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="<%= t('flash.close') %>"></button>
         </div>
       <% end %>
 
       <% if flash[:alert] %>
         <div class="alert alert-danger alert-dismissible fade show m-0 rounded-0" role="alert">
           <%= flash[:alert] %>
-          <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+          <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="<%= t('flash.close') %>"></button>
         </div>
       <% end %>
     <% end %>

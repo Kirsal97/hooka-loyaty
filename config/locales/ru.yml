@@ -1,0 +1,115 @@
+ru:
+  nav:
+    dashboard: "Панель управления"
+    add_client: "Добавить клиента"
+    settings: "Настройки"
+    logout: "Выход"
+  
+  dashboard:
+    search_placeholder: "Поиск по номеру телефона..."
+    search_button: "Поиск"
+    clients_header: "Клиенты"
+    add_new_client: "Добавить клиента"
+    results_count:
+      one: "%{count} результат"
+      few: "%{count} результата"
+      many: "%{count} результатов"
+      other: "%{count} результата"
+    results_for: 'по запросу "%{query}"'
+    no_clients_found: "Клиенты не найдены по запросу <strong>%{query}</strong>"
+    no_recent_clients: "Пока нет недавних клиентов"
+    search_or_add_hint: "Найдите клиента или добавьте нового, чтобы начать."
+  
+  client:
+    add_new: "Добавить клиента"
+    back: "Назад"
+    back_to_dashboard: "Вернуться на главную"
+    edit: "Редактировать"
+    name: "Имя"
+    phone: "Телефон"
+    submit: "Сохранить"
+    successfully_added: "Клиент успешно добавлен"
+    updated: "Клиент обновлён"
+    fix_errors: "Исправьте следующие ошибки:"
+    purchases_count: "покупок"
+    paid_purchases_count: "Оплачено"
+    claimed_rewards_count: "Получено наград"
+  
+  clients:
+    show:
+      reward_progress: "Прогресс наград"
+      until_free_hookah: "до бесплатного кальяна"
+      available_rewards: "Доступные награды"
+      earn_hint: "Сделайте %{count} оплаченных покупок для получения награды."
+      claim: "Получить"
+      claim_confirm: "Получить бесплатный кальян?"
+      add_purchase: "Добавить покупку"
+      note: "Заметка"
+      optional_note: "Необязательная заметка"
+      add_purchase_button: "Добавить покупку"
+      purchase_history: "История покупок"
+      date: "Дата"
+      type: "Тип"
+      employee: "Сотрудник"
+      reward: "Награда"
+      paid: "Оплачено"
+      undo: "Отменить"
+      undo_confirm: "Удалить эту покупку?"
+      no_purchases: "Пока нет покупок."
+      load_more: "Загрузить ещё"
+      rewards_available:
+        one: "%{count} награда доступна!"
+        few: "%{count} награды доступны!"
+        many: "%{count} наград доступно!"
+        other: "%{count} награды доступны!"
+      progress: "Прогресс"
+  
+  purchase:
+    recorded: "Покупка записана"
+    failed_to_record: "Не удалось записать покупку"
+    reward_claimed: "Награда получена! Наслаждайтесь бесплатным кальяном"
+    failed_to_claim: "Не удалось получить награду"
+    removed: "Покупка удалена"
+    failed_to_remove: "Не удалось удалить покупку"
+    no_rewards_available: "Нет доступных наград"
+    cant_undo: "Можно отменять покупки только в течение 5 минут"
+  
+  settings:
+    title: "Настройки"
+    lounge_name: "Название заведения"
+    lounge_name_description: "Отображаемое имя в заголовке."
+    reward_threshold: "Порог награды"
+    reward_threshold_description: "Покупок до бесплатного кальяна."
+    save: "Сохранить"
+    updated: "Настройка обновлена"
+    failed_to_update: "Не удалось обновить настройку"
+    threshold_too_low: "Порог должен быть не менее 1"
+  
+  session:
+    sign_in: "Войти"
+    email_address: "Адрес электронной почты"
+    email_placeholder: "Введите ваш email"
+    password: "Пароль"
+    password_placeholder: "Введите ваш пароль"
+    forgot_password: "Забыли пароль?"
+    invalid_credentials: "Попробуйте другой email или пароль."
+    try_again_later: "Попробуйте позже."
+  
+  password:
+    forgot_title: "Забыли пароль?"
+    update_title: "Обновите пароль"
+    email_instructions: "Отправить инструкции по сбросу"
+    new_password: "Новый пароль"
+    confirm_password: "Подтвердите пароль"
+    new_password_placeholder: "Введите новый пароль"
+    confirm_password_placeholder: "Повторите новый пароль"
+    save: "Сохранить"
+    reset_sent: "Инструкции по сбросу пароля отправлены (если сотрудник с таким email существует)."
+    password_reset: "Пароль сброшен."
+    passwords_did_not_match: "Пароли не совпадают."
+    back_to_sign_in: "Вернуться к входу"
+    link_invalid: "Ссылка на сброс пароля недействительна или устарела."
+    try_again_later: "Попробуйте позже."
+  
+  flash:
+    close: "Закрыть"

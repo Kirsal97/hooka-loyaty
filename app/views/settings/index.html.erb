@@ -1,4 +1,4 @@
-<% content_for(:title) { "Settings" } %>
+<% content_for(:title) { t("settings.title") } %>
 
 <% if flash[:notice] || flash[:alert] %>
   <div class="toast-container position-fixed top-0 end-0 p-3" data-controller="toast" style="z-index: 1080;">
@@ -6,7 +6,7 @@
       <div class="toast text-bg-success border-0" role="alert" aria-live="assertive" aria-atomic="true" data-bs-delay="3500">
         <div class="d-flex">
           <div class="toast-body"><%= flash[:notice] %></div>
-          <button type="button" class="btn-close btn-close-white me-2 m-auto" data-bs-dismiss="toast" aria-label="Close"></button>
+          <button type="button" class="btn-close btn-close-white me-2 m-auto" data-bs-dismiss="toast" aria-label="<%= t('flash.close') %>"></button>
         </div>
       </div>
     <% end %>
@@ -14,7 +14,7 @@
       <div class="toast text-bg-danger border-0" role="alert" aria-live="assertive" aria-atomic="true" data-bs-delay="5000">
         <div class="d-flex">
           <div class="toast-body"><%= flash[:alert] %></div>
-          <button type="button" class="btn-close btn-close-white me-2 m-auto" data-bs-dismiss="toast" aria-label="Close"></button>
+          <button type="button" class="btn-close btn-close-white me-2 m-auto" data-bs-dismiss="toast" aria-label="<%= t('flash.close') %>"></button>
         </div>
       </div>
     <% end %>
@@ -24,38 +24,36 @@
 <div class="row justify-content-center">
   <div class="col-lg-8">
     <div class="d-flex justify-content-between align-items-center mb-4">
-      <h1 class="h3 mb-0">Settings</h1>
+      <h1 class="h3 mb-0"><%= t("settings.title") %></h1>
     </div>
 
     <div class="card shadow-sm mb-3">
       <div class="card-body">
-        <h2 class="h6">Lounge Name</h2>
-        <% lounge_description = @lounge_name.description.presence || "Display name shown in header." %>
-        <p class="text-muted small mb-3"><%= lounge_description %></p>
+        <h2 class="h6"><%= t("settings.lounge_name") %></h2>
+        <p class="text-muted small mb-3"><%= t("settings.lounge_name_description") %></p>
         <%= form_with url: setting_path("lounge_name"), method: :patch, class: "d-flex gap-2 align-items-start" do |form| %>
           <%= form.text_field :value,
               value: (@lounge_name.value.presence || "Hookah Lounge"),
               class: "form-control",
               required: true %>
-          <%= form.hidden_field :description, value: lounge_description %>
-          <%= form.submit "Save", class: "btn btn-primary" %>
+          <%= form.hidden_field :description, value: t("settings.lounge_name_description") %>
+          <%= form.submit t("settings.save"), class: "btn btn-primary" %>
         <% end %>
       </div>
     </div>
 
     <div class="card shadow-sm mb-3">
       <div class="card-body">
-        <h2 class="h6">Reward Threshold</h2>
-        <% threshold_description = @reward_threshold.description.presence || "Purchases needed for a free hookah." %>
-        <p class="text-muted small mb-3"><%= threshold_description %></p>
+        <h2 class="h6"><%= t("settings.reward_threshold") %></h2>
+        <p class="text-muted small mb-3"><%= t("settings.reward_threshold_description") %></p>
         <%= form_with url: setting_path("reward_threshold"), method: :patch, class: "d-flex gap-2 align-items-start" do |form| %>
           <%= form.number_field :value,
               value: (@reward_threshold.value.presence || "5"),
               min: 1,
               class: "form-control",
               required: true %>
-          <%= form.hidden_field :description, value: threshold_description %>
-          <%= form.submit "Save", class: "btn btn-primary" %>
+          <%= form.hidden_field :description, value: t("settings.reward_threshold_description") %>
+          <%= form.submit t("settings.save"), class: "btn btn-primary" %>
         <% end %>
       </div>
     </div>

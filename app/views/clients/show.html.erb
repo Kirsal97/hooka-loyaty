@@ -6,7 +6,7 @@
       <div class="toast text-bg-success border-0" role="alert" aria-live="assertive" aria-atomic="true" data-bs-delay="3500">
         <div class="d-flex">
           <div class="toast-body"><%= flash[:notice] %></div>
-          <button type="button" class="btn-close btn-close-white me-2 m-auto" data-bs-dismiss="toast" aria-label="Close"></button>
+          <button type="button" class="btn-close btn-close-white me-2 m-auto" data-bs-dismiss="toast" aria-label="<%= t('flash.close') %>"></button>
         </div>
       </div>
     <% end %>
@@ -14,7 +14,7 @@
       <div class="toast text-bg-danger border-0" role="alert" aria-live="assertive" aria-atomic="true" data-bs-delay="5000">
         <div class="d-flex">
           <div class="toast-body"><%= flash[:alert] %></div>
-          <button type="button" class="btn-close btn-close-white me-2 m-auto" data-bs-dismiss="toast" aria-label="Close"></button>
+          <button type="button" class="btn-close btn-close-white me-2 m-auto" data-bs-dismiss="toast" aria-label="<%= t('flash.close') %>"></button>
         </div>
       </div>
     <% end %>
@@ -25,7 +25,7 @@
   <div class="col-lg-8">
     <div class="d-flex justify-content-between align-items-start mb-4">
       <div>
-        <%= link_to "← Back", root_path, class: "link-secondary text-decoration-none mb-2 d-inline-block" %>
+        <%= link_to "← #{t('client.back')}", root_path, class: "link-secondary text-decoration-none mb-2 d-inline-block" %>
         <h1 class="h3 mb-1"><%= @client.name %></h1>
         <div class="text-muted">
           <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" viewBox="0 0 16 16" class="me-1">
@@ -34,73 +34,73 @@
           <%= @client.formatted_phone %>
         </div>
         <div class="d-flex flex-wrap gap-3 text-muted small mt-2">
-          <span>Total: <%= @client.purchases_count %> purchases</span>
-          <span>Paid: <%= @client.paid_purchases_count %></span>
-          <span>Rewards claimed: <%= @client.claimed_rewards_count %></span>
+          <span><%= t("client.purchases_count") %>: <%= @client.purchases_count %></span>
+          <span><%= t("client.paid_purchases_count") %>: <%= @client.paid_purchases_count %></span>
+          <span><%= t("client.claimed_rewards_count") %>: <%= @client.claimed_rewards_count %></span>
         </div>
       </div>
       <div class="text-end">
-        <%= link_to "Edit", edit_client_path(@client), class: "btn btn-outline-secondary btn-sm" %>
+        <%= link_to t("client.edit"), edit_client_path(@client), class: "btn btn-outline-secondary btn-sm" %>
       </div>
     </div>
 
     <% progress_percent = (@client.progress_to_next_reward.to_f / Setting.reward_threshold * 100).round %>
     <div class="card shadow-sm mb-4">
       <div class="card-body">
-        <h2 class="h6 text-uppercase text-muted mb-3">Reward Progress</h2>
+        <h2 class="h6 text-uppercase text-muted mb-3"><%= t("clients.show.reward_progress") %></h2>
         <div class="d-flex align-items-center justify-content-between mb-2">
           <div class="fw-semibold">
-            <%= @client.progress_to_next_reward %>/<%= Setting.reward_threshold %> until free hookah
+            <%= @client.progress_to_next_reward %>/<%= Setting.reward_threshold %> <%= t("clients.show.until_free_hookah") %>
           </div>
           <div class="text-muted small">
-            Available rewards: <strong><%= @client.available_rewards %></strong>
+            <%= t("clients.show.available_rewards") %>: <strong><%= @client.available_rewards %></strong>
           </div>
         </div>
         <div class="progress mb-3" style="height: 8px;">
           <div class="progress-bar" role="progressbar" style="width: <%= progress_percent %>%"></div>
         </div>
         <div class="d-flex justify-content-between align-items-center">
-          <div class="small text-muted">Earn <%= Setting.reward_threshold %> paid purchases for a reward.</div>
-          <%= button_to "Claim", claim_reward_client_purchases_path(@client), data: { turbo_confirm: "Claim free hookah reward?" }, class: "btn btn-sm btn-success", disabled: !@client.can_claim_reward? %>
+          <div class="small text-muted"><%= t("clients.show.earn_hint", count: Setting.reward_threshold) %></div>
+          <%= button_to t("clients.show.claim"), claim_reward_client_purchases_path(@client), data: { turbo_confirm: t("clients.show.claim_confirm") }, class: "btn btn-sm btn-success", disabled: !@client.can_claim_reward? %>
         </div>
       </div>
     </div>
 
     <%= render "purchases/form", client: @client %>
 
-    <h2 class="h6 text-uppercase text-muted mb-3">Purchase History</h2>
+    <h2 class="h6 text-uppercase text-muted mb-3"><%= t("clients.show.purchase_history") %></h2>
 
     <% if @purchases.any? %>
       <div class="table-responsive">
         <table class="table table-sm align-middle">
           <thead class="table-light">
             <tr>
-              <th>Date</th>
-              <th>Type</th>
-              <th>Note</th>
-              <th>Employee</th>
+              <th><%= t("clients.show.date") %></th>
+              <th><%= t("clients.show.type") %></th>
+              <th><%= t("clients.show.note") %></th>
+              <th><%= t("clients.show.employee") %></th>
               <th></th>
             </tr>
           </thead>
           <tbody>
             <% @purchases.each do |purchase| %>
               <tr>
-                <td><%= time_tag(purchase.created_at, "#{time_ago_in_words(purchase.created_at)} ago") %></td>
+                <td><%= time_tag(purchase.created_at, time_ago_in_words(purchase.created_at)) %></td>
                 <td>
                   <% if purchase.is_reward? %>
-                    <span class="badge bg-success">Reward</span>
+                    <span class="badge bg-success"><%= t("clients.show.reward") %></span>
                   <% else %>
-                    <span class="badge bg-primary">Paid</span>
+                    <span class="badge bg-primary"><%= t("clients.show.paid") %></span>
                   <% end %>
                 </td>
                 <td><%= purchase.note.presence || "-" %></td>
                 <td><%= purchase.employee.name %></td>
                 <td class="text-end">
                   <% if purchase.can_undo? %>
-                    <%= button_to "Undo",
+                    <%= button_to t("clients.show.undo"),
                       client_purchase_path(@client, purchase),
                       method: :delete,
-                      data: { turbo_confirm: "Remove this purchase?" },
+                      data: { turbo_confirm: t("clients.show.undo_confirm") },
                       class: "btn btn-sm btn-outline-danger" %>
                   <% end %>
                 </td>
@@ -110,7 +110,7 @@
         </table>
         <% if @has_more %>
           <div class="d-flex justify-content-end">
-            <%= link_to "Load more",
+            <%= link_to t("clients.show.load_more"),
               client_path(@client, offset: @offset + @per_page),
               class: "btn btn-sm btn-outline-secondary" %>
           </div>
@@ -118,7 +118,7 @@
       </div>
     <% else %>
       <div class="text-center text-muted py-4">
-        No purchases yet.
+        <%= t("clients.show.no_purchases") %>
       </div>
     <% end %>
   </div>
