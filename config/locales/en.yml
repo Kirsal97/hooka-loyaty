@@ -69,6 +69,7 @@ en:
     failed_to_remove: "Failed to remove purchase"
     no_rewards_available: "No rewards available"
     cant_undo: "Can only undo purchases within 5 minutes"
+    free_hookah_reward_note: "Free hookah reward"
   
   settings:
     title: "Settings"

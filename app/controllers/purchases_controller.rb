@@ -21,7 +21,7 @@ class PurchasesController < ApplicationController
     @purchase = @client.purchases.build(
       employee: Current.employee,
       is_reward: true,
-      note: "Free hookah reward"
+      note: t("purchase.free_hookah_reward_note")
     )
 
     if @purchase.save

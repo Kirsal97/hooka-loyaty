@@ -73,6 +73,7 @@ ru:
     failed_to_remove: "Не удалось удалить покупку"
     no_rewards_available: "Нет доступных наград"
     cant_undo: "Можно отменять покупки только в течение 5 минут"
+    free_hookah_reward_note: "Бесплатный кальян в качестве награды"
   
   settings:
     title: "Настройки"
