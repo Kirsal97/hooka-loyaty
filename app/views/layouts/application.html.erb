@@ -46,6 +46,11 @@
               <li class="nav-item">
                 <%= link_to t("nav.settings"), settings_path, class: "nav-link #{'active' if current_page?(settings_path)}" %>
               </li>
+              <% if current_admin? %>
+                <li class="nav-item">
+                  <%= link_to t("nav.all_purchases"), admin_purchases_path, class: "nav-link #{'active' if current_page?(admin_purchases_path)}" %>
+                </li>
+              <% end %>
             </ul>
 
             <div class="d-flex flex-column flex-lg-row align-items-start align-items-lg-center gap-2 mt-3 mt-lg-0">

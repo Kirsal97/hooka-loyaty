@@ -1,0 +1,75 @@
+<% content_for(:title) { t("admin.purchases.title") } %>
+
+<div class="row justify-content-center">
+  <div class="col-lg-10">
+    <h1 class="h3 mb-4"><%= t("admin.purchases.title") %></h1>
+
+    <%= form_with(url: admin_purchases_path, method: :get, local: true, class: "mb-4") do |f| %>
+      <div class="row g-2 align-items-end">
+        <div class="col-md-4">
+          <label for="search" class="form-label small text-muted"><%= t("admin.purchases.search_label") %></label>
+          <input type="text" name="search" id="search" class="form-control form-control-sm" value="<%= params[:search] %>" placeholder="<%= t("admin.purchases.search_placeholder") %>">
+        </div>
+        <div class="col-md-3">
+          <label for="type" class="form-label small text-muted"><%= t("admin.purchases.type_label") %></label>
+          <select name="type" id="type" class="form-select form-select-sm">
+            <option value=""><%= t("admin.purchases.all_types") %></option>
+            <option value="paid" <%= "selected" if params[:type] == "paid" %>><%= t("admin.purchases.type_paid") %></option>
+            <option value="reward" <%= "selected" if params[:type] == "reward" %>><%= t("admin.purchases.type_reward") %></option>
+          </select>
+        </div>
+        <div class="col-md-2">
+          <%= f.submit t("admin.purchases.filter_button"), class: "btn btn-primary btn-sm w-100" %>
+        </div>
+        <div class="col-md-3">
+        </div>
+      </div>
+    <% end %>
+
+    <% if @purchases.any? %>
+      <div class="table-responsive">
+        <table class="table table-sm align-middle">
+          <thead class="table-light">
+            <tr>
+              <th><%= t("admin.purchases.date") %></th>
+              <th><%= t("admin.purchases.client") %></th>
+              <th><%= t("admin.purchases.phone") %></th>
+              <th><%= t("admin.purchases.type") %></th>
+              <th><%= t("admin.purchases.note") %></th>
+              <th><%= t("admin.purchases.employee") %></th>
+            </tr>
+          </thead>
+          <tbody>
+            <% @purchases.each do |purchase| %>
+              <tr>
+                <td><%= time_tag(purchase.created_at, time_ago_in_words(purchase.created_at), title: purchase.created_at.strftime("%d.%m.%Y %H:%M")) %></td>
+                <td><%= link_to purchase.client.name, client_path(purchase.client) %></td>
+                <td><%= purchase.client.formatted_phone %></td>
+                <td>
+                  <% if purchase.is_reward? %>
+                    <span class="badge bg-success"><%= t("admin.purchases.type_reward") %></span>
+                  <% else %>
+                    <span class="badge bg-primary"><%= t("admin.purchases.type_paid") %></span>
+                  <% end %>
+                </td>
+                <td><%= purchase.note.presence || "-" %></td>
+                <td><%= purchase.employee.name %></td>
+              </tr>
+            <% end %>
+          </tbody>
+        </table>
+        <% if @has_more %>
+          <div class="d-flex justify-content-end">
+            <%= link_to t("admin.purchases.load_more"),
+              admin_purchases_path(search: params[:search], type: params[:type], offset: @offset + @per_page),
+              class: "btn btn-sm btn-outline-secondary" %>
+          </div>
+        <% end %>
+      </div>
+    <% else %>
+      <div class="text-center text-muted py-4">
+        <%= t("admin.purchases.no_purchases") %>
+      </div>
+    <% end %>
+  </div>
+</div>

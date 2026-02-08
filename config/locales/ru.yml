@@ -4,6 +4,7 @@ ru:
     add_client: "Добавить клиента"
     settings: "Настройки"
     logout: "Выход"
+    all_purchases: "Все покупки"
   
   dashboard:
     search_placeholder: "Поиск по номеру телефона..."
@@ -114,3 +115,25 @@ ru:
   
   flash:
     close: "Закрыть"
+
+  authorization:
+    not_authorized: "У вас нет прав для доступа к этой странице."
+
+  admin:
+    purchases:
+      title: "Все покупки"
+      search_label: "Поиск по телефону"
+      search_placeholder: "Введите номер телефона"
+      type_label: "Тип"
+      all_types: "Все типы"
+      type_paid: "Оплачено"
+      type_reward: "Награда"
+      filter_button: "Фильтр"
+      date: "Дата"
+      client: "Клиент"
+      phone: "Телефон"
+      type: "Тип"
+      note: "Заметка"
+      employee: "Сотрудник"
+      load_more: "Загрузить ещё"
+      no_purchases: "Покупки не найдены."

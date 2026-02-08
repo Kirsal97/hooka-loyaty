@@ -4,6 +4,7 @@ en:
     add_client: "Add Client"
     settings: "Settings"
     logout: "Logout"
+    all_purchases: "All Purchases"
   
   dashboard:
     search_placeholder: "Search by phone number..."
@@ -110,3 +111,25 @@ en:
   
   flash:
     close: "Close"
+
+  authorization:
+    not_authorized: "You are not authorized to access this page."
+
+  admin:
+    purchases:
+      title: "All Purchases"
+      search_label: "Search by phone"
+      search_placeholder: "Enter phone number"
+      type_label: "Type"
+      all_types: "All types"
+      type_paid: "Paid"
+      type_reward: "Reward"
+      filter_button: "Filter"
+      date: "Date"
+      client: "Client"
+      phone: "Phone"
+      type: "Type"
+      note: "Note"
+      employee: "Employee"
+      load_more: "Load more"
+      no_purchases: "No purchases found."
