@@ -118,4 +118,50 @@ class PurchaseTest < ActiveSupport::TestCase
     )
     assert_equal false, purchase.is_reward
   end
+
+  # can_undo?
+  test "can_undo? returns true for recent purchase" do
+    purchase = Purchase.create!(client: @client, employee: @employee, is_reward: false)
+    assert purchase.can_undo?
+  end
+
+  test "can_undo? returns false after 5 minutes" do
+    purchase = Purchase.create!(client: @client, employee: @employee, is_reward: false)
+    travel 6.minutes do
+      assert_not purchase.can_undo?
+    end
+  end
+
+  test "can_undo? returns true at exactly 5 minutes" do
+    purchase = Purchase.create!(client: @client, employee: @employee, is_reward: false)
+    travel 5.minutes do
+      assert purchase.can_undo?
+    end
+  end
+
+  # Counter cache callbacks
+  test "creating a paid purchase updates client paid_purchases_count" do
+    bob = clients(:bob)
+    assert_equal 0, bob.paid_purchases_count
+
+    Purchase.create!(client: bob, employee: @employee, is_reward: false)
+    assert_equal 1, bob.reload.paid_purchases_count
+  end
+
+  test "creating a reward purchase updates client reward_purchases_count" do
+    bob = clients(:bob)
+    assert_equal 0, bob.reload.reward_purchases_count
+
+    Purchase.create!(client: bob, employee: @employee, is_reward: true)
+    assert_equal 1, bob.reload.reward_purchases_count
+  end
+
+  test "destroying a purchase updates client counters" do
+    bob = clients(:bob)
+    purchase = Purchase.create!(client: bob, employee: @employee, is_reward: false)
+    assert_equal 1, bob.reload.paid_purchases_count
+
+    purchase.destroy
+    assert_equal 0, bob.reload.paid_purchases_count
+  end
 end

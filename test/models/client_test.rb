@@ -164,4 +164,19 @@ class ClientTest < ActiveSupport::TestCase
     # John has earned rewards but already claimed them
     assert_not @john.can_claim_reward?
   end
+
+  # formatted_phone
+  test "formatted_phone formats 10-digit phone" do
+    assert_equal "(555) 123-4567", @john.formatted_phone
+  end
+
+  test "formatted_phone returns phone as-is for non-10-digit" do
+    client = Client.create!(name: "Short Phone", phone: "12345")
+    assert_equal "12345", client.formatted_phone
+  end
+
+  test "formatted_phone returns phone as-is when blank" do
+    client = Client.new(phone: "")
+    assert_equal "", client.formatted_phone
+  end
 end
