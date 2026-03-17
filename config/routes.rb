@@ -20,7 +20,7 @@ Rails.application.routes.draw do
   resources :settings, only: [ :index, :update ], param: :key
 
   namespace :admin do
-    resources :purchases, only: [:index]
+    resources :purchases, only: [ :index ]
   end
 
   # Health check (existing)

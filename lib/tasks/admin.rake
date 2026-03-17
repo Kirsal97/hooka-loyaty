@@ -1,6 +1,6 @@
 namespace :admin do
   desc "Grant admin privileges to an employee (usage: bin/rails admin:grant[email@example.com])"
-  task :grant, [:email] => :environment do |_t, args|
+  task :grant, [ :email ] => :environment do |_t, args|
     unless args[:email]
       puts "Error: Email address is required."
       puts "Usage: bin/rails admin:grant[email@example.com]"
@@ -19,7 +19,7 @@ namespace :admin do
   end
 
   desc "Revoke admin privileges from an employee (usage: bin/rails admin:revoke[email@example.com])"
-  task :revoke, [:email] => :environment do |_t, args|
+  task :revoke, [ :email ] => :environment do |_t, args|
     unless args[:email]
       puts "Error: Email address is required."
       puts "Usage: bin/rails admin:revoke[email@example.com]"
