@@ -19,11 +19,13 @@ class SettingsControllerTest < ActionDispatch::IntegrationTest
   test "update rejects reward threshold less than 1" do
     patch setting_path("reward_threshold"), params: { key: "reward_threshold", value: "0", description: "" }
     assert_redirected_to settings_path
+    assert_equal "5", Setting.find_by(key: "reward_threshold").value
   end
 
   test "update rejects blank reward threshold" do
     patch setting_path("reward_threshold"), params: { key: "reward_threshold", value: "", description: "" }
     assert_redirected_to settings_path
+    assert_equal "5", Setting.find_by(key: "reward_threshold").value
   end
 
   test "update lounge_name" do
