@@ -3,7 +3,8 @@ class Setting < ApplicationRecord
 
   def self.reward_threshold
     Rails.cache.fetch("setting:reward_threshold", expires_in: 1.hour) do
-      find_by(key: "reward_threshold")&.value&.to_i || 5
+      threshold = Integer(find_by(key: "reward_threshold")&.value, exception: false)
+      threshold&.positive? ? threshold : 5
     end
   end
 

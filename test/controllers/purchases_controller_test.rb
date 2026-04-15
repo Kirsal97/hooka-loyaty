@@ -16,6 +16,7 @@ class PurchasesControllerTest < ActionDispatch::IntegrationTest
     end
 
     assert_redirected_to client_path(client)
+    assert_equal I18n.t("purchase.recorded"), flash[:notice]
   end
 
   test "create sets is_reward to false and assigns the current employee" do
@@ -42,6 +43,7 @@ class PurchasesControllerTest < ActionDispatch::IntegrationTest
     end
 
     assert_redirected_to client_path(client)
+    assert_equal I18n.t("purchase.reward_claimed"), flash[:notice]
 
     reward = client.purchases.rewards.order(:created_at).last
     assert reward.is_reward
@@ -56,6 +58,7 @@ class PurchasesControllerTest < ActionDispatch::IntegrationTest
     end
 
     assert_redirected_to client_path(client)
+    assert_equal I18n.t("purchase.no_rewards_available"), flash[:alert]
   end
 
   # --- destroy ---
@@ -69,6 +72,7 @@ class PurchasesControllerTest < ActionDispatch::IntegrationTest
     end
 
     assert_redirected_to client_path(client)
+    assert_equal I18n.t("purchase.removed"), flash[:notice]
   end
 
   test "destroy rejects undo for a purchase older than 5 minutes" do
@@ -81,6 +85,7 @@ class PurchasesControllerTest < ActionDispatch::IntegrationTest
       end
 
       assert_redirected_to client_path(client)
+      assert_equal I18n.t("purchase.cant_undo"), flash[:alert]
     end
   end
 

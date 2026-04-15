@@ -25,22 +25,33 @@ class SettingTest < ActiveSupport::TestCase
   end
 
   test "reward_threshold should return default when not found" do
-    Setting.find_by(key: "reward_threshold").destroy
+    settings(:reward_threshold).destroy
     assert_equal 5, Setting.reward_threshold
   end
 
   test "reward_threshold should convert string to integer" do
-    setting = Setting.find_by(key: "reward_threshold")
+    setting = settings(:reward_threshold)
     setting.update!(value: "10")
     assert_equal 10, Setting.reward_threshold
     assert_kind_of Integer, Setting.reward_threshold
   end
 
-  test "reward_threshold should handle empty string as zero" do
-    setting = Setting.find_by(key: "reward_threshold")
+  test "reward_threshold should fall back to default when blank" do
+    setting = settings(:reward_threshold)
     setting.update!(value: "")
-    # Empty string converts to 0 with to_i
-    assert_equal 0, Setting.reward_threshold
+    assert_equal 5, Setting.reward_threshold
+  end
+
+  test "reward_threshold should fall back to default when zero" do
+    setting = settings(:reward_threshold)
+    setting.update!(value: "0")
+    assert_equal 5, Setting.reward_threshold
+  end
+
+  test "reward_threshold should fall back to default when invalid" do
+    setting = settings(:reward_threshold)
+    setting.update!(value: "not a number")
+    assert_equal 5, Setting.reward_threshold
   end
 
   # Class method: lounge_name
@@ -49,12 +60,12 @@ class SettingTest < ActiveSupport::TestCase
   end
 
   test "lounge_name should return default when not found" do
-    Setting.find_by(key: "lounge_name").destroy
+    settings(:lounge_name).destroy
     assert_equal "Hookah Lounge", Setting.lounge_name
   end
 
   test "lounge_name should return string value" do
-    setting = Setting.find_by(key: "lounge_name")
+    setting = settings(:lounge_name)
     setting.update!(value: "My Custom Lounge")
     assert_equal "My Custom Lounge", Setting.lounge_name
     assert_kind_of String, Setting.lounge_name
