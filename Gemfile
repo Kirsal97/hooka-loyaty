@@ -40,7 +40,7 @@ gem "rails-i18n", "~> 8.0"
 
 # Pinned below 3.0: json 3.x dropped support for passing options as a
 # positional hash, which breaks ActiveSupport::JSON.decode on Rails 8.1.3.1.
-gem "json", "~> 2.21"
+gem "json", "~> 3.0"
 
 group :development, :test do
   # See https://guides.rubyonrails.org/debugging_rails_applications.html#debugging-with-the-debug-gem
